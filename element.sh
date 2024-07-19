@@ -22,7 +22,7 @@ MAIN_FUNC(){
         # found
         SYMBOL=$($PSQL "select symbol from elements where atomic_number=$ARG1")
         ATOMIC_MASS=$($PSQL "select atomic_mass from properties where atomic_number=$ARG1")
-        TYPE=$($PSQL "select type from properties where atomic_number=$ARG1")
+        TYPE=$($PSQL "select type from properties inner join types using(type_id) where atomic_number=$ARG1")
         MELTING_POINT=$($PSQL "select melting_point_celsius from properties where atomic_number=$ARG1")
         BOILING_POINT=$($PSQL "select boiling_point_celsius from properties where atomic_number=$ARG1")
 
@@ -39,7 +39,7 @@ MAIN_FUNC(){
         NAME=$($PSQL "select name from elements where symbol='$ARG1'")
 
         ATOMIC_MASS=$($PSQL "select atomic_mass from properties where atomic_number=$ATOMIC_NUMBER")
-        TYPE=$($PSQL "select type from properties where atomic_number=$ATOMIC_NUMBER")
+        TYPE=$($PSQL "select type from properties inner join types using(type_id) where atomic_number=$ATOMIC_NUMBER")
         MELTING_POINT=$($PSQL "select melting_point_celsius from properties where atomic_number=$ATOMIC_NUMBER")
         BOILING_POINT=$($PSQL "select boiling_point_celsius from properties where atomic_number=$ATOMIC_NUMBER")
 
@@ -55,7 +55,7 @@ MAIN_FUNC(){
         SYMBOL=$($PSQL "select symbol from elements where name='$ARG1'")
 
         ATOMIC_MASS=$($PSQL "select atomic_mass from properties where atomic_number=$ATOMIC_NUMBER")
-        TYPE=$($PSQL "select type from properties where atomic_number=$ATOMIC_NUMBER")
+        TYPE=$($PSQL "select type from properties inner join types using(type_id) where atomic_number=$ATOMIC_NUMBER")
         MELTING_POINT=$($PSQL "select melting_point_celsius from properties where atomic_number=$ATOMIC_NUMBER")
         BOILING_POINT=$($PSQL "select boiling_point_celsius from properties where atomic_number=$ATOMIC_NUMBER")
 
